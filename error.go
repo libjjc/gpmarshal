@@ -91,6 +91,13 @@ func(ext *errorExtends)outOfRange(v,max int)extendFunc{
     }
 }
 
+func(ext *errorExtends)canNotSet()extendFunc{
+    return func(err *MarshalError)*MarshalError{
+        err.reason = fmt.Sprintf("can not set , must be point")
+        return err
+    }
+}
+
 
 
 

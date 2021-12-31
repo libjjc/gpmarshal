@@ -359,6 +359,10 @@ func(dec *textDecoder)decode(out interface{})error{
         }
         return dec.err
     }
+    pv := reflect.ValueOf(out)
+    if pv.Kind() != reflect.Ptr || pv.IsNil() {
+        return newMarshalError(errors.New("type invalid")).withExtend(extends.decoding()).withExtend(extends.canNotSet())
+    }
     return dec.value(reflect.ValueOf(out))
 }
 
