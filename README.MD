@@ -35,3 +35,9 @@ func main(){
     fmt.Println(in,out,e)
 }
 ```
+
+
+### todo
+- error type recognizable
+- error context details
+- apiMarshal&apiUnmarshal for type of the member of struct is interface
