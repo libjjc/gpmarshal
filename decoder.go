@@ -4,6 +4,7 @@ import (
     "errors"
     "fmt"
     "reflect"
+    "runtime"
     "strconv"
     "strings"
 )
@@ -13,6 +14,8 @@ func Unmarshal(s string,out interface{})(err error){
         r := recover()
         if r != nil {
             switch x := r.(type) {
+            case runtime.Error:
+                panic(r)
             case string:
                 err = newMarshalError(errors.New(x)).withExtend(extends.decoding())
             case error:
