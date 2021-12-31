@@ -79,7 +79,7 @@ func intUnmarshalTest(){
         So(s,ShouldEqual,fmt.Sprintf("i:%d;",in))
         So(e,ShouldBeNil)
         var r int8
-        e = Unmarshal(s,&r)
+        e = Unmarshal([]byte(s),&r)
         fmt.Println(s,e)
         So(r,ShouldEqual,in)
         So(e,ShouldBeNil)
@@ -96,7 +96,7 @@ func intUnmarshalTest(){
         So(s,ShouldEqual,fmt.Sprintf("i:%d;",in))
         So(e,ShouldBeNil)
         var r int16
-        e = Unmarshal(s,&r)
+        e = Unmarshal([]byte(s),&r)
         So(in,ShouldEqual,r)
         So(e,ShouldBeNil)
     }
@@ -111,7 +111,7 @@ func intUnmarshalTest(){
         So(s,ShouldEqual,fmt.Sprintf("i:%d;",in))
         So(e,ShouldBeNil)
         var r int32
-        e = Unmarshal(s,&r)
+        e = Unmarshal([]byte(s),&r)
         So(in,ShouldEqual,r)
         So(e,ShouldBeNil)
     }
@@ -126,7 +126,7 @@ func intUnmarshalTest(){
         So(s,ShouldEqual,fmt.Sprintf("i:%d;",in))
         So(e,ShouldBeNil)
         var r int64
-        e = Unmarshal(s,&r)
+        e = Unmarshal([]byte(s),&r)
         So(in,ShouldEqual,r)
         So(e,ShouldBeNil)
     }
@@ -141,7 +141,7 @@ func intUnmarshalTest(){
         So(s,ShouldEqual,fmt.Sprintf("i:%d;",in))
         So(e,ShouldBeNil)
         var r int
-        e = Unmarshal(s,&r)
+        e = Unmarshal([]byte(s),&r)
         So(in,ShouldEqual,r)
         So(e,ShouldBeNil)
     }
@@ -158,7 +158,7 @@ func uintUnmarshalTest(){
         So(s,ShouldEqual,fmt.Sprintf("i:%d;",in))
         So(e,ShouldBeNil)
         var r uint8
-        e = Unmarshal(s,&r)
+        e = Unmarshal([]byte(s),&r)
         So(in,ShouldEqual,r)
         So(e,ShouldBeNil)
     }
@@ -173,7 +173,7 @@ func uintUnmarshalTest(){
         So(s,ShouldEqual,fmt.Sprintf("i:%d;",in))
         So(e,ShouldBeNil)
         var r uint16
-        e = Unmarshal(s,&r)
+        e = Unmarshal([]byte(s),&r)
         So(in,ShouldEqual,r)
         So(e,ShouldBeNil)
     }
@@ -188,7 +188,7 @@ func uintUnmarshalTest(){
         So(s,ShouldEqual,fmt.Sprintf("i:%d;",in))
         So(e,ShouldBeNil)
         var r uint32
-        e = Unmarshal(s,&r)
+        e = Unmarshal([]byte(s),&r)
         So(in,ShouldEqual,r)
         So(e,ShouldBeNil)
     }
@@ -205,7 +205,7 @@ func uintUnmarshalTest(){
         // So(s,ShouldEqual,fmt.Sprintf("i:%d;",in))
         So(e,ShouldBeNil)
         var r uint64
-        e = Unmarshal(s,&r)
+        e = Unmarshal([]byte(s),&r)
         fmt.Println(s,e)
         So(in,ShouldEqual,r)
         So(e,ShouldBeNil)
@@ -223,7 +223,7 @@ func uintUnmarshalTest(){
         So(s,ShouldEqual,fmt.Sprintf("i:%d;",in))
         So(e,ShouldBeNil)
         var r uint
-        e = Unmarshal(s,&r)
+        e = Unmarshal([]byte(s),&r)
         fmt.Println(s,e)
         So(in,ShouldEqual,r)
         So(e,ShouldBeNil)
@@ -244,7 +244,7 @@ func floatUnmarshalTest(){
         So(e,ShouldBeNil)
         var r float32
         exp := 0.000001
-        e = Unmarshal(s,&r)
+        e = Unmarshal([]byte(s),&r)
         So(math.Abs(float64(in-r)),ShouldBeLessThanOrEqualTo,exp)
         So(e,ShouldBeNil)
     }
@@ -254,7 +254,7 @@ func floatUnmarshalTest(){
         So(e,ShouldBeNil)
         var r float64
         exp := 0.000001
-        e = Unmarshal(s,&r)
+        e = Unmarshal([]byte(s),&r)
         So(math.Abs(in-r),ShouldBeLessThanOrEqualTo,exp)
         So(e,ShouldBeNil)
     }
@@ -277,7 +277,7 @@ func stringUnmarshalTest(){
         fmt.Println(s,e)
         So(e,ShouldBeNil)
         r :=""
-        e = Unmarshal(s,&r)
+        e = Unmarshal([]byte(s),&r)
         So(in,ShouldEqual,r)
         So(e,ShouldBeNil)
     }
@@ -294,7 +294,7 @@ func boolUnmarshalTest(){
         s,e := php_serialize.Serialize(pv)
         So(e,ShouldBeNil)
         var r bool
-        e = Unmarshal(s,&r)
+        e = Unmarshal([]byte(s),&r)
         So(in,ShouldEqual,r)
         So(e,ShouldBeNil)
     }
@@ -330,7 +330,7 @@ func simpleStructTest(){
     }
     s,e := php_serialize.Serialize(in)
     So(e,ShouldBeNil)
-    e = Unmarshal(s,out)
+    e = Unmarshal([]byte(s),out)
     So(e,ShouldBeNil)
     So(out.I8,ShouldEqual,8)
     So(out.I16,ShouldEqual,-16)
@@ -371,7 +371,7 @@ func inheritedStructTest(){
     out := &Struct2{}
     s,e := php_serialize.Serialize(in)
     So(e,ShouldBeNil)
-    e = Unmarshal(s,out)
+    e = Unmarshal([]byte(s),out)
     So(e,ShouldBeNil)
     So(out.Name,ShouldEqual,"jjchen")
     So(out.Age,ShouldEqual,33)
@@ -389,7 +389,7 @@ func combinationStructTest(){
     out := &Struct3{}
     s,e := php_serialize.Serialize(in)
     So(e,ShouldBeNil)
-    e = Unmarshal(s,out)
+    e = Unmarshal([]byte(s),out)
     So(e,ShouldBeNil)
     So(out.S1.Name,ShouldEqual,"jjchen")
     So(out.S2.Age,ShouldEqual,33)
@@ -403,7 +403,7 @@ func sliceUnmarshalTest(){
     s,e := php_serialize.Serialize(in)
     So(e,ShouldBeNil)
     rs:=make( []string,0)
-    e = Unmarshal(s,&rs)
+    e = Unmarshal([]byte(s),&rs)
     fmt.Println(rs)
 }
 
@@ -414,7 +414,7 @@ func arrayUnmarshalTest(){
     s,e := php_serialize.Serialize(in)
     So(e,ShouldBeNil)
     rs:=[4]string{}
-    e = Unmarshal(s,&rs)
+    e = Unmarshal([]byte(s),&rs)
     fmt.Println(rs)
 }
 
@@ -425,7 +425,7 @@ func mapUnmarshalTest(){
     s,e := php_serialize.Serialize(in)
     So(e,ShouldBeNil)
     rs:=map[int]string{}
-    e = Unmarshal(s,&rs)
+    e = Unmarshal([]byte(s),&rs)
     fmt.Println(rs)
 }
 
@@ -502,7 +502,7 @@ func complexFieldTest(){
     s,e := php_serialize.Serialize(in)
     So(e,ShouldBeNil)
     rs:= &ComplexStruct{}
-    e = Unmarshal(s,&rs)
+    e = Unmarshal([]byte(s),&rs)
     fmt.Println(rs)
     So(rs.S3.Sex,ShouldEqual,1)
     So(rs.S3.S1.Name,ShouldEqual,"jjchen")

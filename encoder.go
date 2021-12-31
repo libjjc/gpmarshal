@@ -13,17 +13,21 @@ var(
     textEncodePool sync.Pool
 )
 
-func Marshal(value interface{})(string,error){
+type apiMarshal interface {
+    Marshal(value interface{})([]byte,error)
+}
+
+func Marshal(value interface{})([]byte,error){
     enc := newTextEncoder()
     if err := enc.encode(value);err!=nil{
         mse , ok := err.(*MarshalError)
         if !ok{
             mse = newMarshalError(err).withExtend(extends.encoding())
         }
-        return "",mse
+        return nil,mse
     }
     textEncodePool.Put(enc)
-    return enc.String(),nil
+    return enc.Bytes(),nil
 }
 
 type textEncoder struct{

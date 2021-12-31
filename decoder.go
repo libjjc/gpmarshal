@@ -1,15 +1,15 @@
 package gpmarshal
 
 import (
+    "Github/go/src/pkg/bytes"
     "errors"
     "fmt"
     "reflect"
     "runtime"
     "strconv"
-    "strings"
 )
 
-func Unmarshal(s string,out interface{})(err error){
+func Unmarshal(buf []byte,out interface{})(err error){
     defer func()(){
         r := recover()
         if r != nil {
@@ -28,7 +28,7 @@ func Unmarshal(s string,out interface{})(err error){
     }()
     dec := &textDecoder{
         err:  nil,
-        scan: newScanner(s),
+        scan: newScanner(buf),
     }
     err = dec.decode(out)
     if err != nil {
@@ -40,18 +40,22 @@ func Unmarshal(s string,out interface{})(err error){
     return
 }
 
+type apiUnmarshal interface {
+    Unmarshal([]byte,interface{})error
+}
+
 type textDecoder struct{
     err error
     scan *scanner
 }
 
 type scanner struct{
-    strings.Reader
+    bytes.Reader
 }
 
-func newScanner(s string)*scanner{
+func newScanner(buf []byte)*scanner{
     return &scanner{
-        *strings.NewReader(s),
+        *bytes.NewReader(buf),
     }
 }
 

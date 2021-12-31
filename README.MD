@@ -51,3 +51,5 @@ func main(){
 - error type recognizable
 - error context details
 - apiMarshal&apiUnmarshal for type of the member of struct is interface
+- more tag support
+- more type support
