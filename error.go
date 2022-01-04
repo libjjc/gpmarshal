@@ -5,6 +5,9 @@ import (
     "fmt"
     "reflect"
 )
+const(
+    ErrorContextByteLength = 15
+)
 
 var(
     nullPhpValue = newMarshalError(errors.New("null php value"))
@@ -98,7 +101,18 @@ func(ext *errorExtends)canNotSet()extendFunc{
     }
 }
 
-
-
-
-
+func(ext *errorExtends)context(dec *textDecoder)extendFunc{
+    return func(err *MarshalError)*MarshalError{
+        if dec == nil || dec.scan == nil{
+            return err
+        }
+        cursor := dec.scan.cursor()
+        offset := cursor - ErrorContextByteLength
+        if offset < 0{
+            offset = 0
+        }
+        buf := dec.scan.read(2*ErrorContextByteLength)
+        err.context = fmt.Sprintf(" error index of bytes of source = %d , source=...%s...",cursor,string(buf))
+        return err
+    }
+}

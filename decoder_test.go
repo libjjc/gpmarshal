@@ -71,16 +71,14 @@ func TestUnmarshal(t *testing.T){
 }
 
 func intUnmarshalTest(){
-    i8s := []int8{/*math.MinInt8,math.MinInt8+1,-1,0,1,math.MaxInt8-1,math.MaxInt8*/ }
+    i8s := []int8{math.MinInt8,math.MinInt8+1,-1,0,1,math.MaxInt8-1,math.MaxInt8}
     i8test := func(in int8){
         pv := php_serialize.PhpValue(in)
         s,e := php_serialize.Serialize(pv)
-        fmt.Println(s,e)
         So(s,ShouldEqual,fmt.Sprintf("i:%d;",in))
         So(e,ShouldBeNil)
         var r int8
         e = Unmarshal([]byte(s),&r)
-        fmt.Println(s,e)
         So(r,ShouldEqual,in)
         So(e,ShouldBeNil)
     }

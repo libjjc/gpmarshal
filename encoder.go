@@ -1,7 +1,6 @@
 package gpmarshal
 
 import (
-    "Github/go/src/pkg/encoding/json"
     "bytes"
     "fmt"
     "reflect"
@@ -136,7 +135,6 @@ func(te *textEncoder)value(in reflect.Value)error{
     case reflect.Ptr:
         return te.value(in.Elem())
     case reflect.Interface:
-        return te.api()
     default:
     }
     return nil

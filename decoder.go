@@ -56,6 +56,10 @@ import (
 //
 //  more usage see README.md
 func Unmarshal(buf []byte,out interface{})(err error){
+    dec := &textDecoder{
+        err:  nil,
+        scan: newScanner(buf),
+    }
     defer func()(){
         r := recover()
         if r != nil {
@@ -63,25 +67,28 @@ func Unmarshal(buf []byte,out interface{})(err error){
             case runtime.Error:
                 panic(r)
             case string:
-                err = newMarshalError(errors.New(x)).withExtend(extends.decoding())
+                err = newMarshalError(errors.New(x)).
+                    withExtend(extends.decoding()).
+                    withExtend(extends.context(dec))
             case error:
-                err = newMarshalError(x).withExtend(extends.decoding())
+                err = newMarshalError(x).
+                    withExtend(extends.decoding()).
+                    withExtend(extends.context(dec))
             default:
-                err = newMarshalError(errors.New("unknown panic")).withExtend(extends.decoding())
+                err = newMarshalError(errors.New("unknown panic")).
+                    withExtend(extends.decoding()).
+                    withExtend(extends.context(dec))
             }
         }
         return
     }()
-    dec := &textDecoder{
-        err:  nil,
-        scan: newScanner(buf),
-    }
     err = dec.decode(out)
     if err != nil {
-        _, ok := err.(*MarshalError)
+        mse, ok := err.(*MarshalError)
         if !ok {
-            err = newMarshalError(err).withExtend(extends.decoding())
+            mse = newMarshalError(err).withExtend(extends.decoding())
         }
+        mse.withExtend(extends.context(dec))
     }
     return
 }

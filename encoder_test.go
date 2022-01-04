@@ -83,23 +83,23 @@ func int8MarshalTest(){
     pa := make(php_serialize.PhpSlice,0)
     for _,i := range in{
         s,e := Marshal(i)
-        fmt.Println("Marshal(",i,")=",s," | err=",e)
+        fmt.Println("Marshal(",i,")=",string(s)," | err=",e)
         So(e,ShouldBeNil)
-        So(s,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(s),ShouldEqual,fmt.Sprintf("i:%d;",i))
         sp,ep :=Marshal(&i)
-        fmt.Println("Marshal(",i,")=",sp," | err=",ep)
+        fmt.Println("Marshal(",i,")=",string(sp)," | err=",ep)
         So(ep,ShouldBeNil)
-        So(sp,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(sp),ShouldEqual,fmt.Sprintf("i:%d;",i))
         pa = append(pa,i)
     }
 
     arrStr , _ := php_serialize.Serialize(pa)
     res ,err := Marshal(in)
     So(err,ShouldBeNil)
-    So(res,ShouldEqual,arrStr)
+    So(string(res),ShouldEqual,arrStr)
     resp,errp := Marshal(&in)
     So(errp,ShouldBeNil)
-    So(resp,ShouldEqual,arrStr)
+    So(string(resp),ShouldEqual,arrStr)
 }
 
 func int16MarshalTest(){
@@ -107,22 +107,22 @@ func int16MarshalTest(){
     pa := make(php_serialize.PhpSlice,0)
     for _,i := range in{
         s,e := Marshal(i)
-        fmt.Println("Marshal(",i,")=",s," | err=",e)
+        fmt.Println("Marshal(",i,")=",string(s)," | err=",e)
         So(e,ShouldBeNil)
-        So(s,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(s),ShouldEqual,fmt.Sprintf("i:%d;",i))
         sp,ep :=Marshal(&i)
-        fmt.Println("Marshal(",i,")=",sp," | err=",ep)
+        fmt.Println("Marshal(",i,")=",string(sp)," | err=",ep)
         So(ep,ShouldBeNil)
-        So(sp,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(sp),ShouldEqual,fmt.Sprintf("i:%d;",i))
         pa = append(pa,i)
     }
     arrStr , _ := php_serialize.Serialize(pa)
     res ,err := Marshal(in)
     So(err,ShouldBeNil)
-    So(res,ShouldEqual,arrStr)
+    So(string(res),ShouldEqual,arrStr)
     resp,errp := Marshal(&in)
     So(errp,ShouldBeNil)
-    So(resp,ShouldEqual,arrStr)
+    So(string(resp),ShouldEqual,arrStr)
 }
 
 func int32MarshalTest(){
@@ -130,22 +130,22 @@ func int32MarshalTest(){
     pa := make(php_serialize.PhpSlice,0)
     for _,i := range in{
         s,e := Marshal(i)
-        fmt.Println("Marshal(",i,")=",s," | err=",e)
+        fmt.Println("Marshal(",i,")=",string(s)," | err=",e)
         So(e,ShouldBeNil)
-        So(s,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(s),ShouldEqual,fmt.Sprintf("i:%d;",i))
         sp,ep :=Marshal(&i)
-        fmt.Println("Marshal(",i,")=",sp," | err=",ep)
+        fmt.Println("Marshal(",i,")=",string(sp)," | err=",ep)
         So(ep,ShouldBeNil)
-        So(sp,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(sp),ShouldEqual,fmt.Sprintf("i:%d;",i))
         pa = append(pa,i)
     }
     arrStr , _ := php_serialize.Serialize(pa)
     res ,err := Marshal(in)
     So(err,ShouldBeNil)
-    So(res,ShouldEqual,arrStr)
+    So(string(res),ShouldEqual,arrStr)
     resp,errp := Marshal(&in)
     So(errp,ShouldBeNil)
-    So(resp,ShouldEqual,arrStr)
+    So(string(resp),ShouldEqual,arrStr)
 }
 
 func int64MarshalTest(){
@@ -153,22 +153,22 @@ func int64MarshalTest(){
     pa := make(php_serialize.PhpSlice,0)
     for _,i := range in{
         s,e := Marshal(i)
-        fmt.Println("Marshal(",i,")=",s," | err=",e)
+        fmt.Println("Marshal(",i,")=",string(s)," | err=",e)
         So(e,ShouldBeNil)
-        So(s,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(s),ShouldEqual,fmt.Sprintf("i:%d;",i))
         sp,ep :=Marshal(&i)
-        fmt.Println("Marshal(",i,")=",sp," | err=",ep)
+        fmt.Println("Marshal(",i,")=",string(sp)," | err=",ep)
         So(ep,ShouldBeNil)
-        So(sp,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(sp),ShouldEqual,fmt.Sprintf("i:%d;",i))
         pa = append(pa,i)
     }
     arrStr , _ := php_serialize.Serialize(pa)
     res ,err := Marshal(in)
     So(err,ShouldBeNil)
-    So(res,ShouldEqual,arrStr)
+    So(string(res),ShouldEqual,arrStr)
     resp,errp := Marshal(&in)
     So(errp,ShouldBeNil)
-    So(resp,ShouldEqual,arrStr)
+    So(string(resp),ShouldEqual,arrStr)
 }
 
 func intMarshalTest(){
@@ -176,22 +176,22 @@ func intMarshalTest(){
     pa := make(php_serialize.PhpSlice,0)
     for _,i := range in{
         s,e := Marshal(i)
-        fmt.Println("Marshal(",i,")=",s," | err=",e)
+        fmt.Println("Marshal(",i,")=",string(s)," | err=",e)
         So(e,ShouldBeNil)
-        So(s,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(s),ShouldEqual,fmt.Sprintf("i:%d;",i))
         sp,ep :=Marshal(&i)
-        fmt.Println("Marshal(",i,")=",sp," | err=",ep)
+        fmt.Println("Marshal(",i,")=",string(sp)," | err=",ep)
         So(ep,ShouldBeNil)
-        So(sp,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(sp),ShouldEqual,fmt.Sprintf("i:%d;",i))
         pa = append(pa,i)
     }
     arrStr , _ := php_serialize.Serialize(pa)
     res ,err := Marshal(in)
     So(err,ShouldBeNil)
-    So(res,ShouldEqual,arrStr)
+    So(string(res),ShouldEqual,arrStr)
     resp,errp := Marshal(&in)
     So(errp,ShouldBeNil)
-    So(resp,ShouldEqual,arrStr)
+    So(string(resp),ShouldEqual,arrStr)
 }
 
 func uint8MarshalTest(){
@@ -199,23 +199,23 @@ func uint8MarshalTest(){
     pa := make(php_serialize.PhpSlice,0)
     for _,i := range in{
         s,e := Marshal(i)
-        fmt.Println("Marshal(",i,")=",s," | err=",e)
+        fmt.Println("Marshal(",i,")=",string(s)," | err=",e)
         So(e,ShouldBeNil)
-        So(s,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(s),ShouldEqual,fmt.Sprintf("i:%d;",i))
         sp,ep :=Marshal(&i)
-        fmt.Println("Marshal(",i,")=",sp," | err=",ep)
+        fmt.Println("Marshal(",i,")=",string(sp)," | err=",ep)
         So(ep,ShouldBeNil)
-        So(sp,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(sp),ShouldEqual,fmt.Sprintf("i:%d;",i))
         pa = append(pa,i)
     }
 
     arrStr , _ := php_serialize.Serialize(pa)
     res ,err := Marshal(in)
     So(err,ShouldBeNil)
-    So(res,ShouldEqual,arrStr)
+    So(string(res),ShouldEqual,arrStr)
     resp,errp := Marshal(&in)
     So(errp,ShouldBeNil)
-    So(resp,ShouldEqual,arrStr)
+    So(string(resp),ShouldEqual,arrStr)
 }
 
 func uint16MarshalTest(){
@@ -223,22 +223,22 @@ func uint16MarshalTest(){
     pa := make(php_serialize.PhpSlice,0)
     for _,i := range in{
         s,e := Marshal(i)
-        fmt.Println("Marshal(",i,")=",s," | err=",e)
+        fmt.Println("Marshal(",i,")=",string(s)," | err=",e)
         So(e,ShouldBeNil)
-        So(s,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(s),ShouldEqual,fmt.Sprintf("i:%d;",i))
         sp,ep :=Marshal(&i)
-        fmt.Println("Marshal(",i,")=",sp," | err=",ep)
+        fmt.Println("Marshal(",i,")=",string(sp)," | err=",ep)
         So(ep,ShouldBeNil)
-        So(sp,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(sp),ShouldEqual,fmt.Sprintf("i:%d;",i))
         pa = append(pa,i)
     }
     arrStr , _ := php_serialize.Serialize(pa)
     res ,err := Marshal(in)
     So(err,ShouldBeNil)
-    So(res,ShouldEqual,arrStr)
+    So(string(res),ShouldEqual,arrStr)
     resp,errp := Marshal(&in)
     So(errp,ShouldBeNil)
-    So(resp,ShouldEqual,arrStr)
+    So(string(resp),ShouldEqual,arrStr)
 }
 
 func uint32MarshalTest(){
@@ -246,22 +246,22 @@ func uint32MarshalTest(){
     pa := make(php_serialize.PhpSlice,0)
     for _,i := range in{
         s,e := Marshal(i)
-        fmt.Println("Marshal(",i,")=",s," | err=",e)
+        fmt.Println("Marshal(",i,")=",string(s)," | err=",e)
         So(e,ShouldBeNil)
-        So(s,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(s),ShouldEqual,fmt.Sprintf("i:%d;",i))
         sp,ep :=Marshal(&i)
-        fmt.Println("Marshal(",i,")=",sp," | err=",ep)
+        fmt.Println("Marshal(",i,")=",string(sp)," | err=",ep)
         So(ep,ShouldBeNil)
-        So(sp,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(sp),ShouldEqual,fmt.Sprintf("i:%d;",i))
         pa = append(pa,i)
     }
     arrStr , _ := php_serialize.Serialize(pa)
     res ,err := Marshal(in)
     So(err,ShouldBeNil)
-    So(res,ShouldEqual,arrStr)
+    So(string(res),ShouldEqual,arrStr)
     resp,errp := Marshal(&in)
     So(errp,ShouldBeNil)
-    So(resp,ShouldEqual,arrStr)
+    So(string(resp),ShouldEqual,arrStr)
 }
 
 func uint64MarshalTest(){
@@ -269,22 +269,22 @@ func uint64MarshalTest(){
     pa := make(php_serialize.PhpSlice,0)
     for _,i := range in{
         s,e := Marshal(i)
-        fmt.Println("Marshal(",i,")=",s," | err=",e)
+        fmt.Println("Marshal(",i,")=",string(s)," | err=",e)
         So(e,ShouldBeNil)
-        So(s,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(s),ShouldEqual,fmt.Sprintf("i:%d;",i))
         sp,ep :=Marshal(&i)
-        fmt.Println("Marshal(",i,")=",sp," | err=",ep)
+        fmt.Println("Marshal(",i,")=",string(sp)," | err=",ep)
         So(ep,ShouldBeNil)
-        So(sp,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(sp),ShouldEqual,fmt.Sprintf("i:%d;",i))
         pa = append(pa,i)
     }
     arrStr , _ := php_serialize.Serialize(pa)
     res ,err := Marshal(in)
     So(err,ShouldBeNil)
-    So(res,ShouldEqual,arrStr)
+    So(string(res),ShouldEqual,arrStr)
     resp,errp := Marshal(&in)
     So(errp,ShouldBeNil)
-    So(resp,ShouldEqual,arrStr)
+    So(string(resp),ShouldEqual,arrStr)
 }
 
 func uintMarshalTest(){
@@ -292,22 +292,22 @@ func uintMarshalTest(){
     pa := make(php_serialize.PhpSlice,0)
     for _,i := range in{
         s,e := Marshal(i)
-        fmt.Println("Marshal(",i,")=",s," | err=",e)
+        fmt.Println("Marshal(",i,")=",string(s)," | err=",e)
         So(e,ShouldBeNil)
-        So(s,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(s),ShouldEqual,fmt.Sprintf("i:%d;",i))
         sp,ep :=Marshal(&i)
-        fmt.Println("Marshal(",i,")=",sp," | err=",ep)
+        fmt.Println("Marshal(",i,")=",string(sp)," | err=",ep)
         So(ep,ShouldBeNil)
-        So(sp,ShouldEqual,fmt.Sprintf("i:%d;",i))
+        So(string(sp),ShouldEqual,fmt.Sprintf("i:%d;",i))
         pa = append(pa,i)
     }
     arrStr , _ := php_serialize.Serialize(pa)
     res ,err := Marshal(in)
     So(err,ShouldBeNil)
-    So(res,ShouldEqual,arrStr)
+    So(string(res),ShouldEqual,arrStr)
     resp,errp := Marshal(&in)
     So(errp,ShouldBeNil)
-    So(resp,ShouldEqual,arrStr)
+    So(string(resp),ShouldEqual,arrStr)
 }
 
 func float32MarshalTest(){
@@ -317,22 +317,22 @@ func float32MarshalTest(){
     pa := make(php_serialize.PhpSlice,0)
     for _,i := range in{
         s,e := Marshal(i)
-        fmt.Println("Marshal(",i,")=",s," | err=",e)
+        fmt.Println("Marshal(",i,")=",string(s)," | err=",e)
         So(e,ShouldBeNil)
-        //So(s,ShouldEqual,fmt.Sprintf("d:%1.6f;",i))
+        //So(string(s),ShouldEqual,fmt.Sprintf("d:%1.6f;",i))
         sp,ep :=Marshal(&i)
-        fmt.Println("Marshal(",i,")=",sp," | err=",ep)
+        fmt.Println("Marshal(",i,")=",string(sp)," | err=",ep)
         So(ep,ShouldBeNil)
-        //So(sp,ShouldEqual,fmt.Sprintf("d:%1.6f;",i))
+        //So(string(sp),ShouldEqual,fmt.Sprintf("d:%1.6f;",i))
         pa = append(pa,i)
     }
     // arrStr , _ := php_serialize.Serialize(pa)
     _ ,err := Marshal(in)
     So(err,ShouldBeNil)
-    // So(res,ShouldEqual,arrStr)
+    // So(string(res),ShouldEqual,arrStr)
     _,errp := Marshal(&in)
     So(errp,ShouldBeNil)
-    // So(resp,ShouldEqual,arrStr)
+    // So(string(resp),ShouldEqual,arrStr)
 }
 
 func float64MarshalTest(){
@@ -342,22 +342,22 @@ func float64MarshalTest(){
     pa := make(php_serialize.PhpSlice,0)
     for _,i := range in{
         s,e := Marshal(i)
-        fmt.Println("Marshal(",i,")=",s," | err=",e)
+        fmt.Println("Marshal(",i,")=",string(s)," | err=",e)
         So(e,ShouldBeNil)
-        //So(s,ShouldEqual,fmt.Sprintf("d:%1.6f;",i))
+        //So(string(s),ShouldEqual,fmt.Sprintf("d:%1.6f;",i))
         sp,ep :=Marshal(&i)
-        fmt.Println("Marshal(",i,")=",sp," | err=",ep)
+        fmt.Println("Marshal(",i,")=",string(sp)," | err=",ep)
         So(ep,ShouldBeNil)
-        //So(sp,ShouldEqual,fmt.Sprintf("d:%1.6f;",i))
+        //So(string(sp),ShouldEqual,fmt.Sprintf("d:%1.6f;",i))
         pa = append(pa,i)
     }
     arrStr , _ := php_serialize.Serialize(pa)
     res ,err := Marshal(in)
     So(err,ShouldBeNil)
-    So(res,ShouldEqual,arrStr)
+    So(string(res),ShouldEqual,arrStr)
     resp,errp := Marshal(&in)
     So(errp,ShouldBeNil)
-    So(resp,ShouldEqual,arrStr)
+    So(string(resp),ShouldEqual,arrStr)
 }
 
 func stringMarshalTest(){
@@ -379,22 +379,22 @@ func stringMarshalTest(){
     pa := make(php_serialize.PhpSlice,0)
     for _,i := range in{
         s,e := Marshal(i)
-        fmt.Println("Marshal(",i,")=",s," | err=",e)
+        fmt.Println("Marshal(",i,")=",string(s)," | err=",e)
         So(e,ShouldBeNil)
-        //So(s,ShouldEqual,fmt.Sprintf("d:%1.6f;",i))
+        //So(string(s),ShouldEqual,fmt.Sprintf("d:%1.6f;",i))
         sp,ep :=Marshal(&i)
-        fmt.Println("Marshal(",i,")=",sp," | err=",ep)
+        fmt.Println("Marshal(",i,")=",string(sp)," | err=",ep)
         So(ep,ShouldBeNil)
-        //So(sp,ShouldEqual,fmt.Sprintf("d:%1.6f;",i))
+        //So(string(sp),ShouldEqual,fmt.Sprintf("d:%1.6f;",i))
         pa = append(pa,i)
     }
     arrStr , _ := php_serialize.Serialize(pa)
     res ,err := Marshal(in)
     So(err,ShouldBeNil)
-    So(res,ShouldEqual,arrStr)
+    So(string(res),ShouldEqual,arrStr)
     resp,errp := Marshal(&in)
     So(errp,ShouldBeNil)
-    So(resp,ShouldEqual,arrStr)
+    So(string(resp),ShouldEqual,arrStr)
 }
 
 func boolMarshalTest(){
@@ -402,22 +402,22 @@ func boolMarshalTest(){
     pa := make(php_serialize.PhpSlice,0)
     for _,i := range in{
         s,e := Marshal(i)
-        fmt.Println("Marshal(",i,")=",s," | err=",e)
+        fmt.Println("Marshal(",i,")=",string(s)," | err=",e)
         So(e,ShouldBeNil)
-        //So(s,ShouldEqual,fmt.Sprintf("b:%d;",i))
+        //So(string(s),ShouldEqual,fmt.Sprintf("b:%d;",i))
         sp,ep :=Marshal(&i)
-        fmt.Println("Marshal(",i,")=",sp," | err=",ep)
+        fmt.Println("Marshal(",i,")=",string(sp)," | err=",ep)
         So(ep,ShouldBeNil)
-        //So(sp,ShouldEqual,fmt.Sprintf("d:%1.6f;",i))
+        //So(string(sp),ShouldEqual,fmt.Sprintf("d:%1.6f;",i))
         pa = append(pa,i)
     }
     arrStr , _ := php_serialize.Serialize(pa)
     res ,err := Marshal(in)
     So(err,ShouldBeNil)
-    So(res,ShouldEqual,arrStr)
+    So(string(res),ShouldEqual,arrStr)
     resp,errp := Marshal(&in)
     So(errp,ShouldBeNil)
-    So(resp,ShouldEqual,arrStr)
+    So(string(resp),ShouldEqual,arrStr)
 }
 
 type SimpleNormalStruct struct {
@@ -458,10 +458,10 @@ func structSimpleTest(){
         False: false,
     }
     s , e := Marshal(sns)
-    fmt.Println(s)
+    fmt.Println(string(s))
     So(e,ShouldBeNil)
     s,e = Marshal(*sns)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
 }
 
@@ -493,10 +493,10 @@ func structRecursiveTest(){
         },
     }
     s , e := Marshal(rs)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
     s,e = Marshal(*rs)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
 }
 
@@ -511,99 +511,99 @@ func structUnexportedTest(){
         url:"http://balabalabala.com",
     }
     s , e := Marshal(rs)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
     s,e = Marshal(*rs)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
 }
 
 func mapIntIntTest(){
     in := map[int]int{-3:-33,-2:22,-1:-11,0:0,1:-111,2:222,3:-333}
     s,e := Marshal(in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     in = map[int]int{}
     s,e = Marshal(in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 }
 
 func mapBoolFloatTest(){
     in := map[bool]float32{true:-33,false:11}
     s,e := Marshal(in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 
     in = map[bool]float32{}
     s,e = Marshal(in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 }
 
 func mapStringStringTest(){
     in := map[string]string{"key1":"value1","":""}
     s,e := Marshal(in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 
     in = map[string]string{}
     s,e = Marshal(in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 }
 
 func mapStringIntPtrTest(){
     a ,b  := -33,0
     in := map[string]*int{"key1":&a,"":&b}
     s,e := Marshal(in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 
     in = map[string]*int{}
     s,e = Marshal(in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 }
 
 type structSimpleSample struct{
@@ -622,13 +622,13 @@ type structComplexSample struct{
 func complexMapTest(){
     in1 := make(map[string]*structSimpleSample)
     s,e := Marshal(in1)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in1)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 
     in1["first"] = &structSimpleSample{
         N: 1,
@@ -643,23 +643,23 @@ func complexMapTest(){
         F: 0,
     }
     s,e = Marshal(in1)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in1)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 
     in2 := make(map[string][]*structSimpleSample)
     s,e = Marshal(in2)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in1)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 
     in2["first"] = append(in2["first"],&structSimpleSample{
         N: 1,
@@ -674,13 +674,13 @@ func complexMapTest(){
         F: 0,
     })
     s,e = Marshal(in1)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in1)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 }
 
 func complexSliceTest(){
@@ -699,23 +699,23 @@ func complexSliceTest(){
         },
     }
     s,e := Marshal(in1)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in1)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 
     in2 := []structSimpleSample{}
     s,e = Marshal(in2)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in1)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 
     in2 = append(in2,structSimpleSample{
         N: 1,
@@ -729,25 +729,25 @@ func complexSliceTest(){
         F: 0,
     })
     s,e = Marshal(in2)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&in1)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 }
 
 func complexStructTest(){
     cst := &structComplexSample{}
     s,e := Marshal(cst)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&cst)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     cst.Stru = &structSimpleSample{
         N: 0,
         S: "",
@@ -777,11 +777,11 @@ func complexStructTest(){
         },
     }
     s,e = Marshal(cst)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
     s,e = Marshal(&cst)
-    fmt.Println(s,e)
+    fmt.Println(string(s),e)
     So(e,ShouldBeNil)
-    So(s,ShouldNotBeEmpty)
+    So(string(s),ShouldNotBeEmpty)
 }
