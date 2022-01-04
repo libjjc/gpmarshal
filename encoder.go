@@ -1,6 +1,7 @@
 package gpmarshal
 
 import (
+    "Github/go/src/pkg/encoding/json"
     "bytes"
     "fmt"
     "reflect"
@@ -135,6 +136,7 @@ func(te *textEncoder)value(in reflect.Value)error{
     case reflect.Ptr:
         return te.value(in.Elem())
     case reflect.Interface:
+        return te.api()
     default:
     }
     return nil
@@ -269,3 +271,20 @@ func(te *textEncoder)object(in reflect.Value)error{
     return nil
 }
 
+func(te *textEncoder)api(in reflect.Value)error{
+    if !in.IsValid(){
+        te.writeString("N;")
+    }
+    marshal,ok :=  in.Interface().(apiMarshal)
+    if !ok{
+        buf,err := marshal.Marshal(in)
+        if err != nil{
+            return err
+        }
+        _,err =  te.Buffer.Write(buf)
+        if err != nil{
+            return err
+        }
+    }
+    return nil
+}

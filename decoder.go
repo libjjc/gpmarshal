@@ -9,6 +9,52 @@ import (
     "strconv"
 )
 
+// Unmarshal parses the php-json-encoded data and stores the result
+// in the value pointed to by v.
+//
+// it supported all type unmarshal from php-json-encode,but except the
+// type chan,interface,function
+//
+//  the parameter `out` must be a pointer,if the parameter can not be addr
+//  Unmarshal will be panic
+//
+// it use a scanner for scan the php-json-encode data. and a decoder
+// for decode the result of scanner into go types.
+//
+// if the type of parameter `out` is slice or array.the buf must encode
+// from php-sequence-array
+//
+// if the type of parameter `out` is map or struct,the buf must encode from the
+// same type of key and value of php-array
+//
+// golang is a strong type language,before we marshal and unmarshal the data of php
+// we should exactly process the type,make sure golang can recognize it. Unmarshal
+// would not do any cast for value .
+//
+// if parameter `out` is a struct,and you want to decode the field of struct.you
+// should make sure the field is exportable,and with `php` tag .
+//
+// Unmarshal will return MarshalError when somethings error(except runtime.error)
+// in decoding.
+//
+// for example:
+//  decoding int variable below
+//  source := "i:3;"
+//  var target int
+//  Unmarshal([]byte(source),&target)
+//  go run this code ,the target will be 3
+//
+//  decoding string variable below
+//  source := "s:11:\"hello world!\"";
+//  var target string
+//  Unmarshal(source,&target)
+//
+//  decoding slice
+//  source :="a:2{i:1;i:3;i:2;i:7;}"
+//  target := make([]int,0)
+//  Unmarshal(source,&target)
+//
+//  more usage see README.md
 func Unmarshal(buf []byte,out interface{})(err error){
     defer func()(){
         r := recover()
@@ -59,6 +105,7 @@ func newScanner(buf []byte)*scanner{
     }
 }
 
+// get the current cursor of scanner
 func (scan *scanner)cursor()int64{
     cursor,err := scan.Seek(0,1)
     if err!=nil{
@@ -71,6 +118,8 @@ func(scan *scanner)skipSpace(){
     scan.skip(' ')
 }
 
+// skip sequenced byte `tk`. and return the prev index of the first byte not `tk`.
+// if the byte which is not `tk` is not found, it will panic
 func(scan *scanner)skip(tk byte){
     for{
         ch,err := scan.ReadByte()
@@ -87,6 +136,8 @@ func(scan *scanner)skip(tk byte){
     }
 }
 
+// skip all byte except `tk`. if `tk` not found,it will panic
+// if `tk` found,the cursor will point to the prev byte index of `tk`
 func(scan *scanner)until(tk uint8)int64{
     for {
         ch, err := scan.ReadByte()
@@ -120,7 +171,7 @@ func (scan *scanner)readByte()byte{
     return ch
 }
 
-func (scan *scanner)read(len int64)string{
+func (scan *scanner)read(len int64)[]byte{
     buf :=make([]byte,len)
     n,err := scan.Read(buf)
     if err != nil{
@@ -129,7 +180,7 @@ func (scan *scanner)read(len int64)string{
     if int64(n)!=len{
         panic(fmt.Sprintf("unexpected lentgh , actually=%d,expect =%d",n,len))
     }
-    return string(buf)
+    return buf
 }
 
 func(scan *scanner)tag(expected byte)error{
@@ -147,6 +198,7 @@ func(scan *scanner)tag(expected byte)error{
     return nil
 }
 
+//
 func(scan *scanner)expect(expected byte){
     scan.skipSpace()
     actually,err := scan.ReadByte()
@@ -261,7 +313,7 @@ func(scan *scanner)string()(string,error){
     s := scan.read(len)
     scan.expect('"')
     scan.expect(';')
-    return s,nil
+    return string(s),nil
 }
 
 func(scan *scanner)array()error{
@@ -646,7 +698,7 @@ func(dec *textDecoder)fieldMap(out reflect.Value)(map[string]*reflect.Value,erro
     if dec.err!=nil{
         return nil,dec.err
     }
-    vmap := make(map[string]*reflect.Value)
+    fieldMap := make(map[string]*reflect.Value)
     ot := out.Type()
     for i := 0 ; i < out.NumField();i++{
         ev := out.Field(i)
@@ -655,11 +707,11 @@ func(dec *textDecoder)fieldMap(out reflect.Value)(map[string]*reflect.Value,erro
         if ok&& tag !=""{
             t,_ :=parseTag(tag)
             if t != ""{
-                vmap[t] = &ev
+                fieldMap[t] = &ev
             }
         }
     }
-    return vmap,nil
+    return fieldMap,nil
 }
 
 func(dec *textDecoder)ptr(out reflect.Value)error{
